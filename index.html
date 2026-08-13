@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Majlis Aqiqah</title>
+    <title>Undangan Majlis Aqiqah - Tuan Athea Haniya</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@600;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <!-- FontAwesome untuk Icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --primary-color: #5c6b73;
-            --secondary-color: #f5f7f8;
-            --text-color: #2c3e50;
-            --accent-color: #95a5a6;
+            --primary-color: #1b4332;       /* Deep Islamic Emerald Green */
+            --secondary-color: #f4f7f6;     /* Soft warm off-white */
+            --gold-color: #c5a880;          /* Modern Matte Gold */
+            --gold-light: #dfcbb0;          /* Light Gold Tone */
+            --text-color: #2b3e34;          /* Deep dark green-gray for rich contrast */
+            --accent-bg: #e9f0ec;           /* Light soft green tint */
+            --white: #ffffff;
         }
 
         * {
@@ -25,90 +28,143 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--secondary-color);
+            background-color: #12281d;
+            background-image: 
+                radial-gradient(var(--gold-color) 0.55px, transparent 0.55px), 
+                radial-gradient(var(--gold-color) 0.55px, #12281d 0.55px);
+            background-size: 22px 22px;
+            background-position: 0 0, 11px 11px;
             color: var(--text-color);
             line-height: 1.6;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding: 20px 0;
         }
 
         .container {
             width: 100%;
             max-width: 480px;
-            background: #ffffff;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            background: var(--white);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             overflow: hidden;
             position: relative;
+            border-radius: 16px;
+            border: 2px solid var(--gold-color);
         }
 
-        /* Header Section dengan Tema Silver & Putih */
+        /* Decorative Islamic Arch Motif Header */
         .header-section {
-            background: linear-gradient(135deg, rgba(240, 243, 242, 0.4), rgba(240, 243, 242, 0.5)), 
-                        url('https://images.unsplash.com/photo-1592136184798-ca0d8e17643a?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-            background-size: cover;
-            background-position: center;
-            color: #0e1114;
+            background: linear-gradient(135deg, rgba(27, 67, 50, 0.95), rgba(8, 28, 20, 0.98)), 
+                        url('https://images.unsplash.com/photo-1592136184798-ca0d8e17643a?q=80&w=870&auto=format&fit=crop') center/cover;
+            color: var(--white);
             text-align: center;
-            padding: 40px 20px;
+            padding: 50px 25px 40px 25px;
             position: relative;
+            border-bottom: 3px solid var(--gold-color);
         }
+
+        /* Geometric corner ornaments simulation */
+        .header-section::before, .header-section::after {
+            content: '✦';
+            position: absolute;
+            color: var(--gold-color);
+            font-size: 1.2rem;
+            top: 15px;
+        }
+        .header-section::before { left: 20px; }
+        .header-section::after { right: 20px; }
 
         .header-section h3 {
-            font-size: 1rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            font-weight: 500;
-            color: #5c6b73;
+            letter-spacing: 4px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: var(--gold-color);
         }
 
         .header-section h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
+            font-size: 1.9rem;
             margin-bottom: 15px;
-            color: #0c0f11;
+            color: var(--white);
+            line-height: 1.3;
         }
 
         .header-section p {
-            font-size: 0.95rem;
-            color: #34495e;
+            font-size: 0.88rem;
+            color: #d8e2dc;
+            font-style: italic;
+            border-top: 1px dashed rgba(197, 168, 128, 0.4);
+            border-bottom: 1px dashed rgba(197, 168, 128, 0.4);
+            padding: 10px 0;
+            margin-top: 10px;
         }
 
         /* Content Section */
         .content-section {
-            padding: 30px 20px;
+            padding: 35px 25px;
             text-align: center;
+            background: #fffefb;
+            position: relative;
         }
 
         .bismillah {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
+            font-family: 'Amiri', serif;
+            font-size: 2rem;
+            margin-bottom: 15px;
             color: var(--primary-color);
+            font-weight: 700;
+            text-shadow: 0 1px 2px rgba(197, 168, 128, 0.3);
         }
 
         .invitation-text {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             margin-bottom: 20px;
             color: var(--text-color);
+            line-height: 1.7;
+        }
+
+        /* Elegant Frame Box around Baby's Name */
+        .name-wrapper {
+            border: 1.5px solid var(--gold-light);
+            background: linear-gradient(to bottom, #ffffff, var(--secondary-color));
+            border-radius: 12px;
+            padding: 15px 10px;
+            margin: 20px 0;
+            box-shadow: inset 0 0 10px rgba(197, 168, 128, 0.1);
         }
 
         .child-name-section {
             font-family: 'Great Vibes', cursive;
-            font-size: 3rem;
+            font-size: 3.2rem;
             color: var(--primary-color);
-            margin: 15px 0 25px 0;
-            line-height: 1.2;
+            line-height: 1.1;
+            text-shadow: 1px 1px 2px rgba(197, 168, 128, 0.2);
         }
 
-        /* Event Details Card */
+        /* Event Details Card with Modern Outline */
         .event-card {
-            background: #fafbfc;
+            background: var(--white);
             border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 30px;
-            border: 1px solid #e1e8ed;
+            padding: 25px 20px;
+            margin-bottom: 25px;
+            border: 1px solid var(--gold-light);
+            box-shadow: 0 8px 20px rgba(27, 67, 50, 0.05);
+            position: relative;
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background: var(--gold-color);
+            border-radius: 2px;
         }
 
         .event-item {
@@ -120,21 +176,29 @@
         }
 
         .event-item i {
-            font-size: 1.2rem;
-            color: var(--primary-color);
+            font-size: 1.1rem;
+            color: var(--white);
+            background: var(--primary-color);
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
+            border-radius: 50%;
             margin-bottom: 8px;
+            box-shadow: 0 4px 10px rgba(27, 67, 50, 0.2);
+            border: 1px solid var(--gold-color);
         }
 
         .event-item h4 {
-            font-size: 0.85rem;
+            font-size: 0.78rem;
             text-transform: uppercase;
-            color: #7f8c8d;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
+            color: var(--gold-color);
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+            font-weight: 600;
         }
 
         .event-item p {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
             color: var(--text-color);
         }
@@ -144,105 +208,180 @@
             display: flex;
             gap: 10px;
             justify-content: center;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
-            padding: 12px 20px;
+            padding: 12px 18px;
             border-radius: 50px;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            flex: 1;
         }
 
         .btn-map {
-            background-color: #4285F4;
+            background-color: var(--primary-color);
             color: white;
+            border: 1px solid var(--primary-color);
         }
 
         .btn-waze {
-            background-color: #33ccff;
-            color: white;
+            background-color: var(--white);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
         }
 
         .btn:hover {
-            opacity: 0.9;
             transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(27, 67, 50, 0.2);
         }
 
-        /* RSVP Form */
+        .btn-waze:hover {
+            background-color: var(--accent-bg);
+        }
+
+        /* RSVP Section */
         .rsvp-section {
-            background: #f8f9fa;
-            padding: 25px 20px;
-            border-top: 1px solid #e1e8ed;
+            background: var(--secondary-color);
+            padding: 35px 25px;
+            border-top: 2px solid var(--gold-light);
             text-align: left;
+            position: relative;
         }
 
         .rsvp-section h3 {
             text-align: center;
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .rsvp-message {
+            background: rgba(255, 255, 255, 0.94);
+            border: 1px solid var(--gold-light);
+            border-radius: 12px;
+            padding: 18px 16px;
+            text-align: center;
+            margin-bottom: 22px;
+            box-shadow: 0 4px 12px rgba(27, 67, 50, 0.04);
+        }
+
+        .rsvp-message p {
+            font-size: 0.85rem;
+            line-height: 1.7;
+            color: var(--text-color);
+            margin-bottom: 8px;
+        }
+
+        .rsvp-message p:last-child {
+            margin-bottom: 0;
+        }
+
+        .rsvp-message strong {
             color: var(--primary-color);
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 16px;
         }
 
         .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            margin-bottom: 5px;
-            font-weight: 500;
-            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.78rem;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group label i {
+            color: var(--gold-color);
         }
 
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #cbd5d8;
+            padding: 11px 14px;
+            border: 1px solid var(--gold-light);
             border-radius: 8px;
             font-family: 'Poppins', sans-serif;
             font-size: 0.9rem;
             color: var(--text-color);
-            background: #ffffff;
+            background: var(--white);
+            transition: all 0.3s ease;
         }
 
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             outline: none;
             border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(197, 168, 128, 0.2);
         }
 
         .btn-submit {
             width: 100%;
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), #081c14);
             color: white;
-            border: none;
-            padding: 12px;
+            border: 1px solid var(--gold-color);
+            padding: 13px;
             border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 500;
+            font-size: 0.95rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            margin-top: 5px;
+            box-shadow: 0 4px 15px rgba(27, 67, 50, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .btn-submit:hover {
-            background-color: #4a565d;
+            opacity: 0.95;
+            transform: translateY(-1px);
+        }
+
+        .rsvp-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 18px;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.94);
+            border: 1px solid var(--gold-light);
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: var(--text-color);
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(27, 67, 50, 0.04);
+        }
+
+        .rsvp-note i {
+            color: var(--gold-color);
+            font-size: 1rem;
+            flex-shrink: 0;
         }
 
         /* Footer */
         .footer {
             text-align: center;
             padding: 20px;
-            font-size: 0.8rem;
-            color: #7f8c8d;
-            background: #f5f7f8;
+            font-size: 0.75rem;
+            background: #183325;
+            color: #d8e2dc;
+            border-top: 1px solid var(--gold-color);
         }
 
         /* Animasi Masuk */
@@ -262,18 +401,20 @@
         <!-- Header -->
         <div class="header-section">
             <h3>Undangan Majlis</h3>
-            <h1>Majlis Aqiqah, Kesyukuran & Doa selamat</h1>
-            <p><i>Intan emas penyeri mahkota,<br>Bersinar indah delima sakti,<br>Puteri bunga cahaya mata,<br>Penyinar resah si jantung hati</i></p>
+            <h1>Majlis Aqiqah, Kesyukuran & Doa Selamat</h1>
+            <p>"Intan emas penyeri mahkota, Bersinar indah delima sakti, Puteri bunga cahaya mata, Penyinar resah si jantung hati"</p>
         </div>
 
         <!-- Content -->
         <div class="content-section">
             <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
             <p class="invitation-text">
-                Dengan penuh kesyukuran ke hadrat Ilahi, kami sekeluarga berbesar hati menjemput Dato'/Datin/Tuan/Puan/Encik/Cik sekeluarga ke Majlis Aqiqah & Kesyukuran
+                Dengan penuh kesyukuran ke hadrat Ilahi, kami sekeluarga berbesar hati menjemput Dato'/Datin/Tuan/Puan/Encik/Cik sekeluarga ke Majlis Aqiqah & Kesyukuran puteri kesayangan kami
             </p>
 
-            <div class="child-name-section">Tuan Athea Haniya</div>
+            <div class="name-wrapper">
+                <div class="child-name-section">Tuan Athea Haniya</div>
+            </div>
 
             <!-- Event Card (Tarikh, Masa, Lokasi) -->
             <div class="event-card">
@@ -285,8 +426,8 @@
                 <div class="event-item">
                     <i class="fa-solid fa-clock"></i>
                     <h4>Masa</h4>
-                    <p>Sesi keluarga: 11:00 Pagi - 1:00 Petang</p>
-                    <p>Sesi rakan-rakan: 2:00 - 4:00 Petang</p>
+                    <p>Sesi Keluarga: 11:00 Pagi - 1:00 Petang</p>
+                    <p>Sesi Rakan-rakan: 2:00 - 4:00 Petang</p>
                 </div>
                 <div class="event-item">
                     <i class="fa-solid fa-location-dot"></i>
@@ -309,14 +450,28 @@
         <!-- RSVP Section -->
         <div class="rsvp-section">
             <h3>RSVP Kehadiran</h3>
+            <div class="rsvp-message">
+                <p>
+                    Mohon sahkan kehadiran Tuan/Puan melalui <strong>WhatsApp</strong> untuk mendapatkan <strong>pas masuk</strong>.
+                </p>
+                <p>
+                    Kami amat berharap agar Tuan/Puan dapat meluangkan masa untuk bersama-sama memeriahkan majlis serta berkongsi doa dan keberkatan bersama kami.
+                </p>
+            </div>
+            
             <form id="rsvpForm" onsubmit="handleRSVP(event)">
                 <div class="form-group">
-                    <label for="nama">Nama Penuh</label>
+                    <label for="nama">
+                        <i class="fa-solid fa-user"></i> Nama Penuh
+                    </label>
                     <input type="text" id="nama" required placeholder="Masukkan nama anda">
                 </div>
+
                 <div class="form-group">
-                    <label for="jumlah">Bilangan Kehadiran</label>
-                    <select id="jumlah">
+                    <label for="jumlah">
+                        <i class="fa-solid fa-users"></i> Bilangan Kehadiran
+                    </label>
+                    <select id="jumlah" required>
                         <option value="">Sila Pilih</option>
                         <option value="1">1 Orang</option>
                         <option value="2">2 Orang</option>
@@ -327,17 +482,28 @@
                         <option value="7">7 Orang</option>
                     </select>
                 </div>
+
                 <div class="form-group">
-                    <label for="noplate">No Plate Kenderaan</label>
-                    <input type="text" id="noplate" required placeholder="Masukkan no plate kenderaan anda">
+                    <label for="noplate">
+                        <i class="fa-solid fa-car"></i> No. Plat Kenderaan
+                    </label>
+                    <input type="text" id="noplate" required placeholder="Contoh: BXX 1234">
                 </div>
-                <button type="submit" class="btn-submit">Hantar RSVP</button>
+
+                <button type="submit" class="btn-submit">
+                    <i class="fa-brands fa-whatsapp"></i> Sahkan Kehadiran Melalui WhatsApp
+                </button>
             </form>
+
+            <div class="rsvp-note">
+                <!-- <i class="fa-solid fa-ticket"></i> -->
+                <span>Pas masuk akan diberikan melalui WhatsApp.</span>
+            </div>
         </div>
 
         <!-- Footer -->
         <div class="footer">
-            <p>&copy; 2026 Majlis Aqiqah. Dijadikan dengan ❤️</p>
+            <p>&copy; 2026 Majlis Aqiqah Tuan Athea Haniya. Dijadikan dengan ❤️</p>
         </div>
     </div>
 
@@ -349,7 +515,7 @@
             const jumlah = document.getElementById('jumlah').value;
 
             const phone = "60145231150"; 
-            const text = `Salam, saya ${nama}. Saya mengesahkan status kehadiran seramai *${jumlah} orang* ke Majlis Aqiqah Athea Haniya. No pendaftaran kenderaan adalah ${noplate}.`;
+            const text = `Salam, saya ${nama}. Saya mengesahkan status kehadiran seramai *${jumlah} orang* ke Majlis Aqiqah Tuan Athea Haniya. No pendaftaran kenderaan adalah ${noplate}.`;
             
             const url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
             window.open(url, '_blank');
