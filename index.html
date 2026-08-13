@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Majlis Aqiqah</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- FontAwesome untuk Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #5c6b73;
+            --secondary-color: #f5f7f8;
+            --text-color: #2c3e50;
+            --accent-color: #95a5a6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background: #ffffff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Header Section dengan Tema Silver & Putih */
+        .header-section {
+            background: linear-gradient(135deg, rgba(240, 243, 242, 0.4), rgba(240, 243, 242, 0.5)), 
+                        url('https://images.unsplash.com/photo-1592136184798-ca0d8e17643a?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            color: #0e1114;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .header-section h3 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: #5c6b73;
+        }
+
+        .header-section h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: #0c0f11;
+        }
+
+        .header-section p {
+            font-size: 0.95rem;
+            color: #34495e;
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .bismillah {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .invitation-text {
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .child-name-section {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin: 15px 0 25px 0;
+            line-height: 1.2;
+        }
+
+        /* Event Details Card */
+        .event-card {
+            background: #fafbfc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid #e1e8ed;
+        }
+
+        .event-item {
+            margin-bottom: 20px;
+        }
+
+        .event-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .event-item i {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .event-item h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: #7f8c8d;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .event-item p {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .btn-map {
+            background-color: #4285F4;
+            color: white;
+        }
+
+        .btn-waze {
+            background-color: #33ccff;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* RSVP Form */
+        .rsvp-section {
+            background: #f8f9fa;
+            padding: 25px 20px;
+            border-top: 1px solid #e1e8ed;
+            text-align: left;
+        }
+
+        .rsvp-section h3 {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cbd5d8;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            background: #ffffff;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #4a565d;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            background: #f5f7f8;
+        }
+
+        /* Animasi Masuk */
+        .container {
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header-section">
+            <h3>Undangan Majlis</h3>
+            <h1>Majlis Aqiqah, Kesyukuran & Doa selamat</h1>
+            <p><i>Intan emas penyeri mahkota,<br>Bersinar indah delima sakti,<br>Puteri bunga cahaya mata,<br>Penyinar resah si jantung hati</i></p>
+        </div>
+
+        <!-- Content -->
+        <div class="content-section">
+            <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+            <p class="invitation-text">
+                Dengan penuh kesyukuran ke hadrat Ilahi, kami sekeluarga berbesar hati menjemput Dato'/Datin/Tuan/Puan/Encik/Cik sekeluarga ke Majlis Aqiqah & Kesyukuran
+            </p>
+
+            <div class="child-name-section">Tuan Athea Haniya</div>
+
+            <!-- Event Card (Tarikh, Masa, Lokasi) -->
+            <div class="event-card">
+                <div class="event-item">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <h4>Tarikh</h4>
+                    <p>Sabtu, 23 Januari 2027</p>
+                </div>
+                <div class="event-item">
+                    <i class="fa-solid fa-clock"></i>
+                    <h4>Masa</h4>
+                    <p>Sesi keluarga: 11:00 Pagi - 1:00 Petang</p>
+                    <p>Sesi rakan-rakan: 2:00 - 4:00 Petang</p>
+                </div>
+                <div class="event-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <h4>Tempat</h4>
+                    <p>No. 60, Jalan 2/4, Rentak Perdana, 42300 Bandar Puncak Alam, Selangor</p>
+                </div>
+            </div>
+
+            <!-- Navigasi Buttons -->
+            <div class="btn-group">
+                <a href="https://www.google.com/maps?q=3.237178325653076,101.4652328491211&z=17&hl=en" target="_blank" class="btn btn-map">
+                    <i class="fa-solid fa-map-location-dot"></i> Google Maps
+                </a>
+                <a href="https://www.waze.com/ul?ll=3.237178325653076,101.4652328491211&navigate=yes" target="_blank" class="btn btn-waze">
+                    <i class="fa-brands fa-waze"></i> Waze
+                </a>
+            </div>
+        </div>
+
+        <!-- RSVP Section -->
+        <div class="rsvp-section">
+            <h3>RSVP Kehadiran</h3>
+            <form id="rsvpForm" onsubmit="handleRSVP(event)">
+                <div class="form-group">
+                    <label for="nama">Nama Penuh</label>
+                    <input type="text" id="nama" required placeholder="Masukkan nama anda">
+                </div>
+                <div class="form-group">
+                    <label for="jumlah">Bilangan Kehadiran</label>
+                    <select id="jumlah">
+                        <option value="">Sila Pilih</option>
+                        <option value="1">1 Orang</option>
+                        <option value="2">2 Orang</option>
+                        <option value="3">3 Orang</option>
+                        <option value="4">4 Orang</option>
+                        <option value="5">5 Orang</option>
+                        <option value="6">6 Orang</option>
+                        <option value="7">7 Orang</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="noplate">No Plate Kenderaan</label>
+                    <input type="text" id="noplate" required placeholder="Masukkan no plate kenderaan anda">
+                </div>
+                <button type="submit" class="btn-submit">Hantar RSVP</button>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2026 Majlis Aqiqah. Dijadikan dengan ❤️</p>
+        </div>
+    </div>
+
+    <script>
+        function handleRSVP(event) {
+            event.preventDefault();
+            const nama = document.getElementById('nama').value;
+            const noplate = document.getElementById('noplate').value;
+            const jumlah = document.getElementById('jumlah').value;
+
+            const phone = "60145231150"; 
+            const text = `Salam, saya ${nama}. Saya mengesahkan status kehadiran seramai *${jumlah} orang* ke Majlis Aqiqah Athea Haniya. No pendaftaran kenderaan adalah ${noplate}.`;
+            
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
