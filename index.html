@@ -402,7 +402,7 @@
         <div class="header-section">
             <h3>Undangan Majlis</h3>
             <h1>Majlis Aqiqah, Kesyukuran & Doa Selamat</h1>
-            <p>"Intan emas penyeri mahkota, Bersinar indah delima sakti, Puteri bunga cahaya mata, Penyinar resah si jantung hati"</p>
+            <p>"Intan emas penyeri mahkota,<br>Bersinar indah delima sakti,<br>Puteri bunga cahaya mata,<br>Penyinar resah si jantung hati"</p>
         </div>
 
         <!-- Content -->
@@ -431,7 +431,7 @@
                 </div>
                 <div class="event-item">
                     <i class="fa-solid fa-location-dot"></i>
-                    <h4>Tempat</h4>
+                    <h4>Lokasi</h4>
                     <p>No. 60, Jalan 2/4, Rentak Perdana, 42300 Bandar Puncak Alam, Selangor</p>
                 </div>
             </div>
@@ -455,7 +455,7 @@
                     Mohon sahkan kehadiran Tuan/Puan melalui <strong>WhatsApp</strong> untuk mendapatkan <strong>pas masuk</strong>.
                 </p>
                 <p>
-                    Kami amat berharap agar Tuan/Puan dapat meluangkan masa untuk bersama-sama memeriahkan majlis serta berkongsi doa dan keberkatan bersama kami.
+                    Kami amat berharap agar Tuan/Puan dapat meluangkan masa untuk bersama-sama memeriahkan majlis.
                 </p>
             </div>
             
@@ -491,7 +491,7 @@
                 </div>
 
                 <button type="submit" class="btn-submit">
-                    <i class="fa-brands fa-whatsapp"></i> Sahkan Kehadiran Melalui WhatsApp
+                    <i class="fa-brands fa-whatsapp"></i> Sahkan Kehadiran
                 </button>
             </form>
 
@@ -515,7 +515,7 @@
             const jumlah = document.getElementById('jumlah').value;
 
             const phone = "60145231150"; 
-            const text = `Salam, saya ${nama}. Saya mengesahkan status kehadiran seramai *${jumlah} orang* ke Majlis Aqiqah Tuan Athea Haniya. No pendaftaran kenderaan adalah ${noplate}.`;
+            const text = `Salam, saya ${nama}, mengesahkan kehadiran seramai *${jumlah} orang* ke Majlis Aqiqah Tuan Athea Haniya. No pendaftaran kenderaan adalah ${noplate}.`;
             
             const url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
             window.open(url, '_blank');
