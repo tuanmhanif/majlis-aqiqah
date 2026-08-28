@@ -201,6 +201,7 @@
             font-size: 0.9rem;
             font-weight: 500;
             color: var(--text-color);
+            margin-bottom: 12px;
         }
 
         /* Buttons */
@@ -471,9 +472,9 @@
                 <div class="event-item">
                     <i class="fa-solid fa-clock"></i>
                     <h4>Masa</h4>
-                    <p>Sesi Keluarga: 11:00 Pagi - 2:00 Petang</p>
-                    <p>Sesi Rakan(Hanif): 2:00 - 4:00 Petang</p>
-                    <p>Sesi Rakan(Ilyani): 4:00 - 6:00 Petang</p>
+                    <p>Sesi Keluarga:<br> 11:00 Pagi - 2:00 Petang<br></p>
+                    <p>Sesi Rakan Hanif:<br> 2:00 - 4:00 Petang<br></p>
+                    <p>Sesi Rakan Ilyani:<br> 4:00 - 6:00 Petang<br></p>
                 </div>
                 <div class="event-item">
                     <i class="fa-solid fa-location-dot"></i>
@@ -664,9 +665,25 @@
         music.addEventListener("play", updateMusicButton);
         music.addEventListener("pause", updateMusicButton);
 
-        // Browsers normally block autoplay. Start music after the user's
-        // first interaction with the invitation, if possible.
-        document.addEventListener("click", async function startMusicOnce() {
+        // // Browsers normally block autoplay. Start music after the user's
+        // // first interaction with the invitation, if possible.
+        // document.addEventListener("click", async function startMusicOnce() {
+        //     if (music.paused) {
+        //         try {
+        //             await music.play();
+        //             updateMusicButton();
+        //         } catch (error) {
+        //             // User can still press the Muzik button manually.
+        //         }
+        //     }
+        //     document.removeEventListener("click", startMusicOnce);
+        // }, { once: true });
+
+        document.addEventListener("click", startMusic, { once: true });
+        document.addEventListener("touchstart", startMusic, { once: true });
+        window.addEventListener("scroll", startMusic, { once: true });
+
+        async function startMusic() {
             if (music.paused) {
                 try {
                     await music.play();
@@ -675,8 +692,13 @@
                     // User can still press the Muzik button manually.
                 }
             }
-            document.removeEventListener("click", startMusicOnce);
-        }, { once: true });
+
+            document.removeEventListener("click", startMusic);
+            document.removeEventListener("touchstart", startMusic);
+            window.removeEventListener("scroll", startMusic);
+        }
+
+        
     </script>
 </body>
 </html>
