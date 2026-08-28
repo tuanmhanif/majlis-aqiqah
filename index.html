@@ -384,6 +384,43 @@
             border-top: 1px solid var(--gold-color);
         }
 
+
+        /* Music Button */
+        .music-toggle {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            z-index: 1000;
+            border: 1px solid var(--gold-color);
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50px;
+            padding: 10px 14px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.78rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .music-toggle.playing {
+            animation: musicPulse 1.5s infinite;
+        }
+
+        @keyframes musicPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+        }
+
+        @media (max-width: 520px) {
+            .music-toggle {
+                right: 12px;
+                bottom: 12px;
+            }
+        }
+
         /* Animasi Masuk */
         .container {
             animation: fadeIn 1.2s ease-in-out;
@@ -398,6 +435,14 @@
 <body>
 
     <div class="container">
+        <!-- Background Music -->
+        <audio id="bgMusic" loop preload="auto">
+            <source src="Maher%20Zain%20-%20Rahmatun%20Lil%E2%80%99Alameen.mp3" type="audio/mpeg">
+        </audio>
+        <button id="musicToggle" class="music-toggle" type="button" aria-label="Mainkan muzik">
+            <i class="fa-solid fa-music"></i>
+            <span>Muzik</span>
+        </button>
         <!-- Header -->
         <div class="header-section">
             <h3>Undangan Majlis</h3>
@@ -426,8 +471,9 @@
                 <div class="event-item">
                     <i class="fa-solid fa-clock"></i>
                     <h4>Masa</h4>
-                    <p>Sesi Keluarga: 11:00 Pagi - 1:00 Petang</p>
-                    <p>Sesi Rakan-rakan: 2:00 - 4:00 Petang</p>
+                    <p>Sesi Keluarga: 11:00 Pagi - 2:00 Petang</p>
+                    <p>Sesi Rakan(Hanif): 2:00 - 4:00 Petang</p>
+                    <p>Sesi Rakan(Ilyani): 4:00 - 6:00 Petang</p>
                 </div>
                 <div class="event-item">
                     <i class="fa-solid fa-location-dot"></i>
@@ -464,14 +510,14 @@
                     <label for="nama">
                         <i class="fa-solid fa-user"></i> Nama Penuh
                     </label>
-                    <input type="text" id="nama" required placeholder="Masukkan nama anda">
+                    <input type="text" id="nama" name="nama" required placeholder="Masukkan nama anda">
                 </div>
 
                 <div class="form-group">
                     <label for="jumlah">
                         <i class="fa-solid fa-users"></i> Bilangan Kehadiran
                     </label>
-                    <select id="jumlah" required>
+                    <select id="jumlah" name="jumlah" required>
                         <option value="">Sila Pilih</option>
                         <option value="1">1 Orang</option>
                         <option value="2">2 Orang</option>
@@ -487,10 +533,10 @@
                     <label for="noplate">
                         <i class="fa-solid fa-car"></i> No. Plat Kenderaan
                     </label>
-                    <input type="text" id="noplate" required placeholder="Contoh: BXX 1234">
+                    <input type="text" id="noplate" name="noplate" required placeholder="Contoh: BXX 1234">
                 </div>
 
-                <button type="submit" class="btn-submit">
+                <button type="submit" class="btn-submit" id="submitBtn">
                     <i class="fa-brands fa-whatsapp"></i> Sahkan Kehadiran
                 </button>
             </form>
@@ -508,18 +554,129 @@
     </div>
 
     <script>
-        function handleRSVP(event) {
-            event.preventDefault();
-            const nama = document.getElementById('nama').value;
-            const noplate = document.getElementById('noplate').value;
-            const jumlah = document.getElementById('jumlah').value;
+        // ============================================
+        // GOOGLE SHEETS RSVP CONFIGURATION
+        // ============================================
+        // Paste your Google Apps Script Web App URL here.
+                
+        const GOOGLE_SHEET_URL =
+        "https://script.google.com/macros/s/AKfycbz6MEdLVEwDAruXi8RYAtbHUWWPC_oZ376AbKTiuO_lb6W__db9TmdYAhN2DBD1jCZ4rQ/exec";
 
-            const phone = "60103151355"; 
-            const text = `Salam, saya ${nama}, mengesahkan kehadiran seramai *${jumlah} orang* ke Majlis Aqiqah Tuan Athea Haniya. No pendaftaran kenderaan adalah ${noplate}.`;
-            
-            const url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
-            window.open(url, '_blank');
+        const WHATSAPP_PHONE = "60103151355";
+
+        async function handleRSVP(event) {
+            event.preventDefault();
+
+            const submitBtn = document.getElementById("submitBtn");
+
+            const nama = document.getElementById("nama").value.trim();
+            const jumlah = document.getElementById("jumlah").value;
+            const noplate = document.getElementById("noplate").value
+                .trim()
+                .toUpperCase();
+
+            if (!nama || !jumlah || !noplate) {
+                alert("Sila lengkapkan semua maklumat.");
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML =
+                '<i class="fa-solid fa-spinner fa-spin"></i> Menyimpan...';
+
+            try {
+
+                const formData = new FormData();
+
+                formData.append("nama", nama);
+                formData.append("jumlah", jumlah);
+                formData.append("noplate", noplate);
+
+                const response = await fetch(GOOGLE_SHEET_URL, {
+                    method: "POST",
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (!result.success) {
+                    throw new Error(result.error || "Gagal menyimpan RSVP");
+                }
+
+                const whatsappMessage =
+                    `Salam, saya ${nama}, mengesahkan kehadiran seramai *${jumlah} orang* ke Majlis Aqiqah Tuan Athea Haniya. No pendaftaran kenderaan adalah ${noplate}.`;
+
+                const whatsappUrl =
+                    `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(whatsappMessage)}`;
+
+                window.open(whatsappUrl, "_blank");
+
+                alert("Terima kasih atas pengesahan kehadiran. Kami amat menghargai kesudian Tuan/Puan untuk bersama-sama memeriahkan majlis.");
+
+                document.getElementById("rsvpForm").reset();
+
+            } catch (error) {
+
+                console.error(error);
+
+                alert(
+                    "Maaf, RSVP gagal disimpan. Sila cuba semula."
+                );
+
+            } finally {
+
+                submitBtn.disabled = false;
+                submitBtn.innerHTML =
+                    '<i class="fa-brands fa-whatsapp"></i> Sahkan Kehadiran';
+            }
         }
+        // ============================================
+        // BACKGROUND MUSIC
+        // ============================================
+        const music = document.getElementById("bgMusic");
+        const musicToggle = document.getElementById("musicToggle");
+
+        function updateMusicButton() {
+            if (music.paused) {
+                musicToggle.classList.remove("playing");
+                musicToggle.innerHTML = '<i class="fa-solid fa-music"></i><span>Muzik</span>';
+                musicToggle.setAttribute("aria-label", "Mainkan muzik");
+            } else {
+                musicToggle.classList.add("playing");
+                musicToggle.innerHTML = '<i class="fa-solid fa-pause"></i><span>Pause</span>';
+                musicToggle.setAttribute("aria-label", "Hentikan muzik");
+            }
+        }
+
+        musicToggle.addEventListener("click", async () => {
+            try {
+                if (music.paused) {
+                    await music.play();
+                } else {
+                    music.pause();
+                }
+                updateMusicButton();
+            } catch (error) {
+                console.error("Music playback error:", error);
+            }
+        });
+
+        music.addEventListener("play", updateMusicButton);
+        music.addEventListener("pause", updateMusicButton);
+
+        // Browsers normally block autoplay. Start music after the user's
+        // first interaction with the invitation, if possible.
+        document.addEventListener("click", async function startMusicOnce() {
+            if (music.paused) {
+                try {
+                    await music.play();
+                    updateMusicButton();
+                } catch (error) {
+                    // User can still press the Muzik button manually.
+                }
+            }
+            document.removeEventListener("click", startMusicOnce);
+        }, { once: true });
     </script>
 </body>
 </html>
