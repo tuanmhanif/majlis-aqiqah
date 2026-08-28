@@ -679,23 +679,50 @@
         //     document.removeEventListener("click", startMusicOnce);
         // }, { once: true });
 
-        document.addEventListener("click", startMusic, { once: true });
         document.addEventListener("touchstart", startMusic, { once: true });
-        window.addEventListener("scroll", startMusic, { once: true });
+        document.addEventListener("click", startMusic, { once: true });
+
+        console.log("Audio source:", music.currentSrc);
+
+        music.addEventListener("loadeddata", () => {
+            console.log("✅ Audio loaded");
+        });
+
+        music.addEventListener("canplay", () => {
+            console.log("✅ Audio can play");
+        });
+
+        music.addEventListener("error", (e) => {
+            console.error("❌ Audio error", e);
+        });
+
+        //window.addEventListener("scroll", startMusic, { once: true });
+
 
         async function startMusic() {
-            if (music.paused) {
+
+            console.log("startMusic fired");
+
+            console.log("paused =", music.paused);
+            console.log("readyState =", music.readyState);
+            console.log("src =", music.currentSrc);
+
+            //if (music.paused) {
                 try {
-                    await music.play();
+                    const result =  await music.play();
+
+                    console.log("play() returned:", result);
+
                     updateMusicButton();
                 } catch (error) {
                     // User can still press the Muzik button manually.
+                    console.error("play failed", error);
                 }
-            }
+            //}
 
             document.removeEventListener("click", startMusic);
             document.removeEventListener("touchstart", startMusic);
-            window.removeEventListener("scroll", startMusic);
+            //window.removeEventListener("scroll", startMusic);
         }
 
         
