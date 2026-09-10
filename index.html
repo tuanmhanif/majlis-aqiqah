@@ -145,6 +145,15 @@
             text-shadow: 1px 1px 2px rgba(197, 168, 128, 0.2);
         }
 
+        .child-name-subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #8a8a8a;
+            margin-top: 6px;
+        }
+
         /* Event Details Card with Modern Outline */
         .event-card {
             background: var(--white);
@@ -418,42 +427,180 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
 
-            background: rgba(0, 0, 0, 0.35);
-            backdrop-filter: blur(4px);
+            background:
+                radial-gradient(circle at 50% 15%, rgba(197, 168, 128, 0.16), transparent 55%),
+                radial-gradient(circle at 50% 30%, rgba(27, 67, 50, 0.75), rgba(6, 16, 11, 0.94));
+            backdrop-filter: blur(10px) saturate(120%);
+            -webkit-backdrop-filter: blur(10px) saturate(120%);
 
-            transition: opacity 0.6s ease;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+            animation: overlayIn 0.7s ease both;
+        }
+
+        #welcomeOverlay.overlay-hidden {
+            opacity: 0;
+            pointer-events: none;
         }
 
         .welcome-content {
-            width: 90%;
-            max-width: 350px;
+            width: 100%;
+            max-width: 340px;
+            position: relative;
 
-            background: white;
+            background: linear-gradient(165deg, #ffffff 0%, #fbf7f0 100%);
             color: var(--text-color);
 
-            border-radius: 20px;
-            padding: 30px 25px;
+            border-radius: 22px;
+            padding: 38px 26px 30px;
 
             text-align: center;
 
-            border: 2px solid var(--gold-color);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border: 1px solid var(--gold-light);
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.45),
+                0 0 0 6px rgba(255, 255, 255, 0.05),
+                inset 0 0 0 1px rgba(197, 168, 128, 0.25);
+
+            animation: contentPopIn 0.7s 0.15s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        }
+
+        .welcome-content::before,
+        .welcome-content::after {
+            content: '✦';
+            position: absolute;
+            top: 14px;
+            color: var(--gold-color);
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .welcome-content::before { left: 16px; }
+        .welcome-content::after { right: 16px; }
+
+        .welcome-frame {
+            position: absolute;
+            inset: 8px;
+            border: 1px solid rgba(197, 168, 128, 0.45);
+            border-radius: 16px;
+            pointer-events: none;
+        }
+
+        .welcome-bismillah {
+            font-family: 'Amiri', serif;
+            font-size: 1.3rem;
+            color: var(--gold-color);
+            margin-bottom: 14px;
+            opacity: 0;
+            animation: fadeUp 0.6s 0.3s ease both;
+        }
+
+        .welcome-icon-ring {
+            position: relative;
+            width: 66px;
+            height: 66px;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), #081c14);
+            border: 1px solid var(--gold-color);
+            box-shadow: 0 8px 18px rgba(27, 67, 50, 0.35);
+            color: var(--gold-light);
+            font-size: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.6s 0.4s ease both;
+        }
+
+        .welcome-icon-ring::before,
+        .welcome-icon-ring::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 1px solid var(--gold-color);
+            opacity: 0.6;
+            animation: ringPulse 2.6s ease-out infinite;
+        }
+
+        .welcome-icon-ring::after {
+            animation-delay: 1.3s;
+        }
+
+        .welcome-eyebrow {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+            color: var(--gold-color);
+            margin-bottom: 8px;
+            opacity: 0;
+            animation: fadeUp 0.6s 0.5s ease both;
         }
 
         .welcome-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
+            line-height: 1.4;
             color: var(--primary-color);
-            margin-bottom: 10px;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeUp 0.6s 0.6s ease both;
+        }
+
+        .welcome-divider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeUp 0.6s 0.7s ease both;
+        }
+
+        .welcome-divider::before,
+        .welcome-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-light));
+        }
+
+        .welcome-divider::after {
+            background: linear-gradient(90deg, var(--gold-light), transparent);
+        }
+
+        .welcome-divider i {
+            color: var(--gold-color);
+            font-size: 0.65rem;
         }
 
         .welcome-subtitle {
-            color: #666;
-            margin-bottom: 25px;
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.1rem;
+            line-height: 1.15;
+            color: var(--primary-color);
+            margin-bottom: 26px;
+            text-shadow: 1px 1px 2px rgba(197, 168, 128, 0.25);
+            opacity: 0;
+            animation: fadeUp 0.6s 0.8s ease both;
+        }
+
+        .welcome-subtitle span {
+            display: block;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #8a8a8a;
+            margin-top: 2px;
         }
 
         #openInvitationBtn {
+            position: relative;
+            overflow: hidden;
             background: linear-gradient(
                 135deg,
                 var(--primary-color),
@@ -461,17 +608,83 @@
             );
 
             color: white;
-            border: none;
+            border: 1px solid var(--gold-color);
 
             border-radius: 50px;
 
-            padding: 14px 24px;
+            padding: 15px 24px;
 
             cursor: pointer;
 
             width: 100%;
 
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
             font-weight: 600;
+            letter-spacing: 0.5px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+
+            box-shadow: 0 10px 24px rgba(27, 67, 50, 0.35);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+            opacity: 0;
+            animation: fadeUp 0.6s 0.9s ease both;
+        }
+
+        #openInvitationBtn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -60%;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.25), transparent);
+            transform: skewX(-20deg);
+            animation: btnShine 3s ease-in-out infinite;
+        }
+
+        #openInvitationBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px rgba(27, 67, 50, 0.45);
+        }
+
+        .welcome-hint {
+            margin-top: 14px;
+            font-size: 0.72rem;
+            color: #9a9a9a;
+            letter-spacing: 0.3px;
+            opacity: 0;
+            animation: fadeUp 0.6s 1s ease both;
+        }
+
+        @keyframes overlayIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes contentPopIn {
+            from { opacity: 0; transform: translateY(30px) scale(0.92); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes ringPulse {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(1.6); opacity: 0; }
+        }
+
+        @keyframes btnShine {
+            0% { left: -60%; }
+            50% { left: 130%; }
+            100% { left: 130%; }
         }
 
         @keyframes musicPulse {
@@ -483,6 +696,25 @@
             .music-toggle {
                 right: 12px;
                 bottom: 12px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #welcomeOverlay,
+            .welcome-content,
+            .welcome-bismillah,
+            .welcome-icon-ring,
+            .welcome-icon-ring::before,
+            .welcome-icon-ring::after,
+            .welcome-eyebrow,
+            .welcome-title,
+            .welcome-divider,
+            .welcome-subtitle,
+            #openInvitationBtn,
+            #openInvitationBtn::before,
+            .welcome-hint {
+                animation: none !important;
+                opacity: 1 !important;
             }
         }
 
@@ -502,24 +734,33 @@
     <div id="welcomeOverlay">
 
         <div class="welcome-content">
+            <div class="welcome-frame"></div>
 
-            <!-- <div class="bismillah">
-                بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-            </div> -->
+            <div class="welcome-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
 
-            <div class="welcome-title">
-               Undangan Majlis Aqiqah, Kesyukuran & Doa Selamat
+            <div class="welcome-icon-ring">
+                <i class="fa-solid fa-baby"></i>
             </div>
 
+            <div class="welcome-eyebrow">Anda Dijemput Hadir</div>
+
+            <div class="welcome-title">
+               Majlis Aqiqah, Kesyukuran &amp; Doa Selamat
+            </div>
+
+            <div class="welcome-divider"><i class="fa-solid fa-gem"></i></div>
+
             <div class="welcome-subtitle">
-                Tuan Athea Haniya Binti Tuan Muhammad Hanif
+                Tuan Athea Haniya
+                <span>Binti Tuan Muhammad Hanif</span>
             </div>
 
             <button id="openInvitationBtn">
-                <i class="fa-solid fa-envelope-open"></i>
+                <i class="fa-solid fa-envelope-open-text"></i>
                 Buka Jemputan
             </button>
 
+            <p class="welcome-hint">Tekan untuk membuka undangan</p>
         </div>
     </div>
 
@@ -547,7 +788,8 @@
             </p>
 
             <div class="name-wrapper">
-                <div class="child-name-section">Tuan Athea Haniya Binti Tuan Muhammad Hanif</div>
+                <div class="child-name-section">Tuan Athea Haniya</div>
+                <div class="child-name-subtitle">Binti Tuan Muhammad Hanif</div>
             </div>
 
             <!-- Event Card (Tarikh, Masa, Lokasi) -->
@@ -819,19 +1061,13 @@
 
         const openInvitationBtn = document.getElementById("openInvitationBtn");
 
-        openInvitationBtn.addEventListener("click", async () => {
+        openInvitationBtn.addEventListener("click", () => {
 
-            try {
-
-                await music.play();
-
-                updateMusicButton();
-
-            } catch (error) {
-
+            // Fire-and-forget: never let audio issues (blocked autoplay,
+            // slow/missing file) delay opening the invitation.
+            music.play().then(updateMusicButton).catch((error) => {
                 console.error("Music playback error:", error);
-
-            }
+            });
 
             welcomeOverlay.classList.add("overlay-hidden");
 
