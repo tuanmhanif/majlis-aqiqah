@@ -1028,7 +1028,7 @@
                     const attendeeCount = counts[option.value] || 0;
 
                     if (attendeeCount >= SESSION_CAPACITY) {
-                        fullSessions.push(option.textContent);
+                        fullSessions.push(option.value);
                         option.remove();
                     }
                 });
