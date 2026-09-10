@@ -319,6 +319,20 @@
             color: var(--gold-color);
         }
 
+        .form-hint {
+            font-size: 0.72rem;
+            color: #8a8a8a;
+            margin-top: 6px;
+            font-style: italic;
+            min-height: 1em;
+        }
+
+        .form-hint.full {
+            color: #b0413e;
+            font-style: normal;
+            font-weight: 600;
+        }
+
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
             padding: 11px 14px;
@@ -802,9 +816,8 @@
                 <div class="event-item">
                     <i class="fa-solid fa-clock"></i>
                     <h4>Masa</h4>
-                    <p>Sesi Keluarga:<br> 11:00 Pagi - 2:00 Petang<br></p>
-                    <p>Sesi Rakan Hanif & Jiran Tetangga:<br> 2:00 - 4:00 Petang<br></p>
-                    <p>Sesi Rakan Ilyani:<br> 4:00 - 6:00 Petang<br></p>
+                    <p>Sesi Keluarga:<br> 11:00 Pagi</p>
+                    <p>Sesi Rakan &amp; Jiran Tetangga:<br> 12:00 Tengahari - 5:00 Petang</p>
                 </div>
                 <div class="event-item">
                     <i class="fa-solid fa-location-dot"></i>
@@ -842,6 +855,19 @@
                         <i class="fa-solid fa-user"></i> Nama Penuh
                     </label>
                     <input type="text" id="nama" name="nama" required placeholder="Masukkan nama anda">
+                </div>
+
+                <div class="form-group">
+                    <label for="sesi">
+                        <i class="fa-solid fa-clock"></i> Sesi Kehadiran
+                    </label>
+                    <select id="sesi" name="sesi" required>
+                        <option value="">Sila Pilih</option>
+                        <option value="11 AM - 1 PM">11 AM - 1 PM</option>
+                        <option value="1 PM - 3 PM">1 PM - 3 PM</option>
+                        <option value="3 PM - 5 PM">3 PM - 5 PM</option>
+                    </select>
+                    <p class="form-hint" id="sesiHint"></p>
                 </div>
 
                 <div class="form-group">
@@ -895,18 +921,24 @@
 
         const WHATSAPP_PHONE = "60103151355";
 
+        // Maximum guests allowed per session before it is removed from the
+        // dropdown. Keep this in sync with the capacity used in the Google
+        // Apps Script (see SESSION_CAPACITY on the server side).
+        const SESSION_CAPACITY = 80;
+
         async function handleRSVP(event) {
             event.preventDefault();
 
             const submitBtn = document.getElementById("submitBtn");
 
             const nama = document.getElementById("nama").value.trim();
+            const sesi = document.getElementById("sesi").value;
             const jumlah = document.getElementById("jumlah").value;
             const noplate = document.getElementById("noplate").value
                 .trim()
                 .toUpperCase();
 
-            if (!nama || !jumlah || !noplate) {
+            if (!nama || !sesi || !jumlah || !noplate) {
                 alert("Sila lengkapkan semua maklumat.");
                 return;
             }
@@ -920,6 +952,7 @@
                 const formData = new FormData();
 
                 formData.append("nama", nama);
+                formData.append("sesi", sesi);
                 formData.append("jumlah", jumlah);
                 formData.append("noplate", noplate);
 
@@ -935,7 +968,7 @@
                 }
 
                 const whatsappMessage =
-                    `Salam, saya ${nama}, mengesahkan kehadiran seramai *${jumlah} orang* ke Majlis Aqiqah Tuan Athea Haniya. No pendaftaran kenderaan adalah ${noplate}.`;
+                    `Salam, saya ${nama}, mengesahkan kehadiran seramai *${jumlah} orang* pada sesi *${sesi}* ke Majlis Aqiqah Tuan Athea Haniya. No pendaftaran kenderaan adalah ${noplate}.`;
 
                 const whatsappUrl =
                     `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(whatsappMessage)}`;
@@ -945,6 +978,10 @@
                 alert("Terima kasih atas pengesahan kehadiran. Kami amat menghargai kesudian Tuan/Puan untuk bersama-sama memeriahkan majlis.");
 
                 document.getElementById("rsvpForm").reset();
+
+                // Refresh session availability in case this RSVP just filled
+                // up the chosen session.
+                loadSessionAvailability();
 
             } catch (error) {
 
@@ -961,6 +998,56 @@
                     '<i class="fa-brands fa-whatsapp"></i> Sahkan Kehadiran';
             }
         }
+
+        // ============================================
+        // SESSION AVAILABILITY (live counts from the Google Sheet)
+        // ============================================
+        const sesiSelect = document.getElementById("sesi");
+        const sesiHint = document.getElementById("sesiHint");
+
+        async function loadSessionAvailability() {
+            if (!sesiSelect) return;
+
+            sesiHint.textContent = "Menyemak ketersediaan sesi...";
+            sesiHint.classList.remove("full");
+
+            try {
+                const response = await fetch(`${GOOGLE_SHEET_URL}?action=counts`);
+                const result = await response.json();
+
+                if (!result.success || !result.counts) {
+                    throw new Error(result.error || "Gagal menyemak ketersediaan sesi");
+                }
+
+                const counts = result.counts;
+                const fullSessions = [];
+
+                Array.from(sesiSelect.options).forEach((option) => {
+                    if (!option.value) return; // skip the "Sila Pilih" placeholder
+
+                    const attendeeCount = counts[option.value] || 0;
+
+                    if (attendeeCount >= SESSION_CAPACITY) {
+                        fullSessions.push(option.textContent);
+                        option.remove();
+                    }
+                });
+
+                sesiHint.textContent = fullSessions.length
+                    ? `Sesi penuh (tidak dipaparkan): ${fullSessions.join(", ")}`
+                    : "";
+                sesiHint.classList.toggle("full", fullSessions.length > 0);
+
+            } catch (error) {
+                // Fail open: if the availability check can't reach the sheet,
+                // show every session rather than blocking guests from RSVPing.
+                console.error("Session availability check failed:", error);
+                sesiHint.textContent = "";
+            }
+        }
+
+        loadSessionAvailability();
+
         // ============================================
         // BACKGROUND MUSIC
         // ============================================
